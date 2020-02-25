@@ -13,7 +13,7 @@ int main() {
 	initEngine();
 
 	Map map;
-	loadResourceFile("Test.map", &map);
+	loadResourceFile("test.tgr", &map);
 	// This isn't production code ... I hope you did not think it is ...
 	for_each(map.textures.begin(), map.textures.end(), [](TextureInputInfo in) { printf("X = %i\nY = %i\nComp = %i", in.x, in.y, in.comp); });
 	for_each(map.materials.begin(), map.materials.end(), [](Material in) { printf("color = [%f, %f, %f, %f]\ndiffuseTexture = %i", in.color.r, in.color.g, in.color.b, in.color.a, in.diffuseTexture); });
