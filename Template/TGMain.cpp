@@ -5,11 +5,13 @@
 #include <pipeline/buffer/Texturebuffer.hpp>
 #include <gamecontent/camera/2DCamera.hpp>
 #include <io/Resource.hpp>
+#include <pipeline/buffer/UniformBuffer.hpp>
 
 using namespace tge::gmc;
 using namespace tge::tex;
 
 static TopDownCamera camera;
+static glm::vec2 testAnim;
 
 int main() {
 	initEngine();
@@ -22,12 +24,15 @@ int main() {
 		camera.positionx -= in.deltax; 
 		camera.positiony -= in.deltay;
 		setTopDownCamera(camera); 
+		testAnim.x += 0.001;
+		tge::buf::fillUniformBuffer(2, &testAnim, sizeof(glm::vec2));
 	};
 
 	setTopDownCamera(camera);
 
 	Map map;
 	loadResourceFile("test.tgr", &map);
+
 
 	startTGEngine();
 	return 0;
