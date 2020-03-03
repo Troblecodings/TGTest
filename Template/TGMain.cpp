@@ -9,17 +9,22 @@
 using namespace tge::gmc;
 using namespace tge::tex;
 
+static TopDownCamera camera;
+
 int main() {
 	initEngine();
 
-	playercontroller = [](Input* in) {};
-
-	TopDownCamera camera;
 	camera.positionx = 0;
 	camera.positiony = 0;
 	camera.screenwidth = tge::win::mainWindowWidth;
 	camera.screenheight = tge::win::mainWindowHeight;
-	setTopDownCamera(&camera);
+	playercontroller = [](Input in) {
+		camera.positionx -= in.deltax; 
+		camera.positiony -= in.deltay;
+		setTopDownCamera(camera); 
+	};
+
+	setTopDownCamera(camera);
 
 	Map map;
 	loadResourceFile("test.tgr", &map);
