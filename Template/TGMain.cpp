@@ -21,18 +21,18 @@ int main() {
 	camera.screenwidth = tge::win::mainWindowWidth;
 	camera.screenheight = tge::win::mainWindowHeight;
 	playercontroller = [](Input in) {
-		camera.positionx -= in.deltax; 
-		camera.positiony -= in.deltay;
+		camera.positionx -= in.inputX; 
+		camera.positiony -= in.inputY;
 		setTopDownCamera(camera); 
 		testAnim.x += 0.001;
 		tge::buf::fillUniformBuffer(2, &testAnim, sizeof(glm::vec2));
+		OUT_LV_DEBUG(tge::win::mouseHomogenousX << ":" << tge::win::mouseHomogenousY)
 	};
 
 	setTopDownCamera(camera);
 
 	Map map;
 	loadResourceFile("test.tgr", &map);
-
 
 	startTGEngine();
 	return 0;
