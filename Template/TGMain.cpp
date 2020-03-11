@@ -9,6 +9,7 @@
 
 using namespace tge::gmc;
 using namespace tge::tex;
+using namespace tge::io;
 
 static TopDownCamera camera;
 static glm::vec2 testAnim;
@@ -26,7 +27,6 @@ int main() {
 		setTopDownCamera(camera); 
 		testAnim.x += 0.001;
 		tge::buf::fillUniformBuffer(2, &testAnim, sizeof(glm::vec2));
-		OUT_LV_DEBUG(tge::win::mouseHomogenousX << ":" << tge::win::mouseHomogenousY)
 	};
 
 	setTopDownCamera(camera);
