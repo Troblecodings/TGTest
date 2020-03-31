@@ -26,13 +26,13 @@ int main() {
 		camera.positiony -= in.inputY;
 		setTopDownCamera(camera); 
 		testAnim.x += 0.001;
-		tge::buf::fillUniformBuffer(2, &testAnim, sizeof(glm::vec2));
+		tge::buf::fillUniformBuffer(1, &testAnim, sizeof(glm::vec2), sizeof(glm::mat4));
+		tge::buf::fillUniformBuffer(0, &testAnim, sizeof(glm::vec2), sizeof(glm::mat4));
 	};
 
 	setTopDownCamera(camera);
 
-	Map map;
-	loadResourceFile("test.tgr", &map);
+	loadResourceFile("test.tgr");
 
 	startTGEngine();
 	return 0;
