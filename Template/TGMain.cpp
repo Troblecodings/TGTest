@@ -6,6 +6,7 @@
 #include <gamecontent/camera/2DCamera.hpp>
 #include <io/Resource.hpp>
 #include <pipeline/buffer/UniformBuffer.hpp>
+#include <drawlib/Quad.hpp>
 
 using namespace tge::gmc;
 using namespace tge::tex;
@@ -23,18 +24,21 @@ int main() {
 	camera.screenwidth = tge::win::mainWindowWidth;
 	camera.screenheight = tge::win::mainWindowHeight;
 	playercontroller = [](Input in) {
-		camera.positionx -= in.inputX; 
+		camera.positionx -= in.inputX;
 		camera.positiony -= in.inputY;
-		setTopDownCamera(camera); 
+		setTopDownCamera(camera);
 		testAnim.x += 0.001;
 		fillUniformBuffer(TRANSFORM_BUFFER, &testAnim, sizeof(glm::vec2), sizeof(glm::mat4) + sizeof(glm::vec2) * MAX_MATERIALS);
 		fillUniformBuffer(TRANSFORM_BUFFER_2, &testAnim, sizeof(glm::vec2), sizeof(glm::mat4) + sizeof(glm::vec2) * MAX_MATERIALS);
-		glm::vec4 standart(1, 1, 1, 1);
-		tge::buf::fillUniformBuffer(TRANSFORM_BUFFER, &standart, sizeof(glm::vec4), sizeof(glm::mat4));
-		tge::buf::fillUniformBuffer(TRANSFORM_BUFFER_2, &standart, sizeof(glm::vec4), sizeof(glm::mat4));
+		float transforms[] = { 0, testAnim.x * 0.5, 1, 1, testAnim.x * 0.5, 0, 1, 1, 0, -testAnim.x * 0.5, 1, 1 };
+		fillUniformBuffer(TRANSFORM_BUFFER_2, transforms, sizeof(transforms), sizeof(glm::mat4));
 	};
 
-	setTopDownCamera(camera);
+	float transforms[] = { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1 };
+	tge::buf::fillUniformBuffer(TRANSFORM_BUFFER, transforms, sizeof(transforms), sizeof(glm::mat4));
+	tge::buf::fillUniformBuffer(TRANSFORM_BUFFER_2, transforms, sizeof(transforms), sizeof(glm::mat4));
+	glm::mat4 mtrx = tge::drw::genMatrix(0, 0, -0.2, 1, 1);
+	fillUniformBuffer(TRANSFORM_BUFFER_2, &mtrx, sizeof(glm::mat4));
 
 	loadResourceFile("test.tgr");
 
