@@ -1,0 +1,21 @@
+basic := clang++ TGMain.cpp -I../TGEngine/dependencies/Include -I../TGEngine/dependencies/Third-Party/Include -I../TGEngine/stb -I../TGEngine/TGEngine -std=c++17 -Wno-parentheses-equality -Wno-deprecated-declarations -L../TGEngine/TGEngine/out -lvulkan-1 -lSDL2 -lkernel32 -luser32
+
+t64 := -target x86_64-pc-windows-pe -L../TGEngine/dependencies/Lib -L../TGEngine/dependencies/Third-Party/Bin
+t32 := -target i386-pc-windows-pe -L../TGEngine/dependencies/Lib32 -L../TGEngine/dependencies/Third-Party/Bin32
+
+debug := --debug -DDEBUG -g
+release := -O2 -fno-exceptions -fno-cxx-exceptions
+
+%basic% %t64% %debug% -ltgengine-debug-64 -o./out/test-debug-64.exe
+
+%basic% %t64% %release% -ltgengine-release-64 -o./out/test-release-64.exe
+
+
+%basic% %t32% %debug% -ltgengine-debug-32 -o./out/test-debug-32.exe
+
+%basic% %t32% %release% -ltgengine-release-32 -o./out/test-release-32.exe
+
+powershell rm *.o
+
+powershell copy Properties.xml out/Properties.xml
+powershell copy test.tgr out/test.tgr

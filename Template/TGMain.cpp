@@ -30,14 +30,14 @@ int main() {
 		testAnim.x += 0.001;
 		fillUniformBuffer(TRANSFORM_BUFFER, &testAnim, sizeof(glm::vec2), sizeof(glm::mat4) + sizeof(glm::vec2) * MAX_MATERIALS);
 		fillUniformBuffer(TRANSFORM_BUFFER_2, &testAnim, sizeof(glm::vec2), sizeof(glm::mat4) + sizeof(glm::vec2) * MAX_MATERIALS);
-		float transforms[] = { 0, testAnim.x * 0.5, 1, 1, testAnim.x * 0.5, 0, 1, 1, 0, -testAnim.x * 0.5, 1, 1 };
+		float transforms[] = { 0, testAnim.x * 0.5f, 1, 1, testAnim.x * 0.5f, 0, 1, 1, 0, -testAnim.x * 0.5f, 1, 1 };
 		fillUniformBuffer(TRANSFORM_BUFFER_2, transforms, sizeof(transforms), sizeof(glm::mat4));
 	};
 
 	float transforms[] = { 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1 };
 	tge::buf::fillUniformBuffer(TRANSFORM_BUFFER, transforms, sizeof(transforms), sizeof(glm::mat4));
 	tge::buf::fillUniformBuffer(TRANSFORM_BUFFER_2, transforms, sizeof(transforms), sizeof(glm::mat4));
-	glm::mat4 mtrx = tge::drw::genMatrix(0, 0, -0.2, 1, 1);
+	glm::mat4 mtrx = tge::drw::genMatrix(0, 0, -0.2f, 1, 1);
 	fillUniformBuffer(TRANSFORM_BUFFER_2, &mtrx, sizeof(glm::mat4));
 
 	loadResourceFile("test.tgr");
