@@ -1,0 +1,13 @@
+basic := clang++ TGMain.cpp -I../TGEngine/dependencies/Include -I../TGEngine/dependencies/Third-Party/Include -I../TGEngine/stb -I../TGEngine/TGEngine -std=c++17 -Wno-parentheses-equality -Wno-deprecated-declarations ../TGEngine/TGEngine/out/tgengine-release-64.a ../TGEngine/dependencies/linux/lib/libvulkan.so -stdlib=libstdc++
+
+debug := --debug -DDEBUG -g
+release := -O2 -fno-exceptions -fno-cxx-exceptions
+
+tl64 := -target x86_64-pc-linux-elf
+tl32 := -target i386-pc-linux-elf
+
+%basic% %tl64% %debug% -o./out/test-debug-64
+
+%basic% %tl64% %release% -o./out/test-release-64
+
+rm *.o
